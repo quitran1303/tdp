@@ -110,3 +110,51 @@ Figure 2 from Park et al. (2006) give a striking demonstration of the effectiven
 
 Figure 02. Hyperspectral images of poultry carcass
 ![Figure 02. Hyperspectral images of poultry carcass](/images/2.jpg)
+
+## Shutter Selection
+After researching 4 types of camera, the hyperspectral camera is recommended. However, it is the most expensive camera, costing upwards of $50,000. To to eliminate the cost, a single camera will be used in the MVP solution. Once the solution shows that it is effectively and efficiency in detecting the contaminants, the solution will consider a bigger number of hyperspectral camera when deploying to the industry.
+
+Also, to utilize the camera to capture different angles of the beef, a special shape of rail was designed in the inspection room to rotate the carcase continuously and so over the time rolling in the round rail, the carcase was imaged multiple times. And the design also allow a constant movement of the carcass to improve the productivity of the whole process. 
+
+When consider two different types (rolling and global) of the shutter using for hyperspectral, we see that the  result of global shutter oviously better than the output of using a rolling shutter. So, the global shutter is preferred to use in this case. As the demonstrated image below, using a global shutter will also cut down on image processing time as there will be no need for an algorithm to flatten out the spatial distortion.
+
+Figure 03 – Rolling Shutter vs Global Shutter
+![Figure 03 – Rolling Shutter vs Global Shutter](/images/3.jpg)
+
+## Software
+### Data / Image Preparation
+After going over the rounded track, the carcases have been imaged from multiple angles (nearly 3600). The images or streamings are forwarding to the analytic hub for storing then processing. As the special characteristic of hyperspectral image which made up of hundreds of continuous wavebands for each angle position of the studied sample. It means that each pixel in a hyperspectral image contains the spectrum of the specific area in the carcase. 
+
+And after combining the similar images, removing noise in the pre-processing process, the image will be extracted the further information and then highlight the variation between multiple regions of the image. For example, textural analysis by grey level co-occurrence matrix and Gabor transform are two widely used algorithms of hyperspectral image processing (Elmasry, Barbin, Sun & Allen (2012).
+
+After image processing, to establish a corresponding discrimination model, preparing for model training step, some dimensional reduction methods are applied including principal component analysis, independent component analysis, and genetic algorithm.
+
+### Classification & Segmentation 
+A number of segmentation solutions have been investigated and demonstrated the effective identification of contaminants which captured by multispectral imaging system. For instance, Windham et al. (2005), Wu et al. (2017) and Elmasry, Barbin, Sun & Allen (2012) have illutrated the accuracy in the detection of existing contaminants in poultry carcasses with minor false values.
+
+However, these solutions were using the linear statistic approach to detect the result based on the relationship of some main features of date. This will stop the continuous improvement of the model during running in the production. So, some other more sophisticated segmentations should be explored to keep the model learning over the running time (more attributes of ML should be used in this case) without requiring the linear data. 
+
+As summary below, there are four methodologies are researching. 
+**Image Classification & Object Localisation/Detection**
+As shown, image classification and object localisation or object detection are seemly not suitable for the requirement of this project which needs to show exactly the areas in that the carcass affected by one or some of contaminants.
+
+Figure 04. Different results of different types 
+![Different results of different types](/images/4.jpg)
+
+Two other considering methods semantic or instance segmentation provide their advantages in showing not only the areas (in pixel and with specific color) but also the labels for the objects.
+
+**Semantic segmentations** 
+In this model, it will assign an object category label to each pixel in the image. As in the example picture in above figure, the sheep pixels are coloured orange, road pixels are coloured brown, and grass pixels are green. However, all the sheep in the image are coloring with the same label and in the same area.
+
+**Instance segmentations**
+In this model, it will performs to describe above not only for semantic segmentation, but also assigns for any object a label to each pixel in the image. Revisit the example, the pixels for each individual sheep are labelled separately with different colors and separated labels. Instead of having a generic “sheep” pixel class, now there are three classes for the 3 sheep shown: sheep1, sheep2, and sheep3.
+
+# UNET & Mask RCNN Segementation Implementation
+Both semantic with U-NET and instance segmentation with MaskRCNN methods are used, and then determine the most appropriate result for each method. 
+
+U-NET can provide the result faster than Mask R-CNN while the Mask R-CNN can achieve better accuracy. The comparison in table below      for some key attributes. 
+
+Table 01. Comparison between U-NET and Mask R-CNN
+![Comparison between U-NET and Mask R-CNN](/images/5.jpg)
+
+
