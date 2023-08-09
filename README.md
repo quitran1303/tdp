@@ -157,4 +157,73 @@ U-NET can provide the result faster than Mask R-CNN while the Mask R-CNN can ach
 Table 01. Comparison between U-NET and Mask R-CNN
 ![Comparison between U-NET and Mask R-CNN](/images/5.jpg)
 
+# Training and testing the model
+Detecting the contaminants in beef carcasses is the new model because there is no publicly available models for this. So for building new model then training, testing and predicting the contaminants in this case, steps below should be done:
+-	Setup the environment with cloning code of Mask_RCNN from https://github.com/matterport/Mask_RCNN and install two main python packages, keras and tensorflow.
+-	Data preparation with create appropriate folders as recommended structures
+-	From the collection of images, using tools to annotate the objects in images, build the annotation content in JSON files for training directory as well as validation directory
+-	Modify the code of handling for new dataset
+-	Make changes on the configuration for new model
+-	Run training and validating the model
+-	Predict the new image with model
+-	Tuning the model to make sure that the model is sufficienlty trained without being overtrained to the point of overfitting.
 
+However, there is the limitation of images of been contaminants taken, this proof-of-concepts will be alternatively perform both semantic and instance segmentatoin in cityspac images. 
+
+# Deployment
+To take into the advantages of containerize system that limit the differencies (OS or versions of required packages) between working environment as well as save time to deploy to on-premise server or on cloud system, Docker becomes the good solution to be the platform of analytic hub in both development and production environments. 
+A docker image will include their pre-requisite libraries , not only python libraries but also OS required packages and storage allocations, has provided a powerful framework for our pipeline due to the modular, composable and user-friendly design. 
+Base on that docker virtualisation model, the web-service of the Mask RCNN or UNET model will be deployed and used via API calls which will help the system can be developed and extended from local to cloud and mobile in near future. 
+
+# Project outcomes
+35 classes of cityspaces dataset, which is less than 81 objects of COCO dataset.
+Figure 06. Cityspaces classes
+![Cituspaces classes](/images/6.jpg)
+ 
+And the configuration for training model
+Figure 07. Model configuration
+![Model configuration](/images/7.jpg)
+ 
+The image before predicting
+Figure 08. Origin image
+![Origin image](/images/8.jpg)
+ 
+And the image after predicting
+Figure 09. Predicted Image
+![Predicted Image](/images/9.jpg)
+
+And the historam of three choosing layers “Conv2D”, “Dense”, “Conv2DTranspose” is as following:
+Figure 10. Histogram of 3 choosing layers
+![Histogram of 3 choosing layers](/images/10.jpg)
+ 
+And the Precision-Recall Curve, which has AP@50 = 0.366.
+Figure 11. Precision-Recall Curve & AP@50
+![Precision-Recall Curve & AP](/images/11.jpg)
+ 
+The confusion matrix of predicting image
+Figure 12. Confusion Matrix of predicting image
+![Confusion matrix](/images/12.jpg)
+ 
+# Conclusion
+Our team has demonstrated the proof-of-concept for building a new solution to apply for the detecting the meat contaminants with a complex cityscapes dataset, which contains over 34 object classes. The result has proved the promising in real applying the hyperspectral imaging to maximize the capacity of visualizing the contrast of contaminants in meat. The model will have better result in applying case because the number of object in the meat context is less than the number of object types in cityscapes or COCO dataset with just background, meat, fat, and few types of contaminants. 
+
+# Recommendations
+In the limit of time for this proof-of-concept, there are some limitations that should be considered in near future reseach:
+-	The real model with big enough beef meat dataset should be built in order to evaluate the results are as much accuracy as expectation
+-	The speed of processing images Mask RCNN is low, around 5 fps (frames per second) which would be improved to adapt with the mass-manufacturing in food industry. There is one possible improvement is suggested by “Improving the Mask R-CNN performance with TensorRT” https://www.codeproject.com/Articles/1271339/Improving-the-Performance-of-Mask-R-CNN-Using-Tens 
+-	The inspector’s UI view should be developed and some alarms/notifications for notifying the result in order to support the inspectors to monitor in realtime the rolling things and take appropriate actions with the failed meat.
+
+# References
+>Rolling vs Global camera shutter image , in C Coates & I Juvan-Beaulieu, Rolling Shutter vs Global Shutter Mode | How to Choose, Oxford Instruments, viewed 15 April 2021, 
+>Adi, K., Pujiyanto, S., Nurhayati, O. K. and Pamungkas, A. (2017). Beef Quality Identification Using Thresholding Method and Decision Tree Classification Based on Android Smartphone. Journal of Food Quality Article ID 1674718
+>Bell, R. G. (1996). Distribution and sources of microbial contamination on beef carcasses. Journal of Applied Microbiology (82):292-300.
+>Casey, T. A., Rasmussen, M. A. and Petrich, J. W. (1999). Method and system for detecting fecal and ingesta contamination on the carcasses of meat animals. United States Patent, patent number 5,914,247.
+>Elmasry, G., Barbin, D. F., Sun, D-W and Allen, P. (2012). Meat quality evaluation by hyperspectral imaging technique: an overview. Critical Reviews in Food Science and Nutrition 52(8)689-711.
+>Hafiz, A. M., Bhat, G. M. A Survey on Instance Segmentation: State of the art. Department of Electronics and Communication Engineering, Institute of Technology, University of Kashmir, India. 
+>Park, B. and Chen, Y. R. (2001). Co-occurrence matrix texture features of multi-spectral images on poultry carcasses. Journal of Agricultural Engineering Research 78(2):127–139.
+>Park, B., Lawrence, K., Windham, W. and Buhr, R. J. (2002). Hyperspectral imaging for detecting fecal and ingesta contaminants on poultry carcasses. Transactions of the ASAE 45(6):2017–2026.
+>Park, B., Lawrence, K. C., Windham, W. R. and Smith, D. P. (2006). Performance of hyperspectral imaging system for poultry surface fecal contaminant detection. Journal of Agricultural Engineering Research  (3):340–348. 
+>Windham, W., Heitschmidt, G., Smith, D. and Berrang, M. (2005). Detection of ingesta on pre-chilled broiler carcasses by hyperspectral imaging. International Journal of Poultry Science 4(12):959–964. 
+>Wu, W., Chen, G. Y., Kang, R., Xia, J. C., Huang, Y. P., & Chen, K. J. (2017). Successive Projections Algorithm-Multivariable Linear Regression Classifier for The Detection Of Contaminants on Chicken Carcasses In Hyperspectral Images. Journal of Applied Spectroscopy, 84(3), 535-541.
+>Xiong, Z., Xie, A., Sun, D-W. and Liu, D. (2015). Applications of Hyperspectral Imaging in Chicken Meat Safety and Quality Detection and Evaluation: A Review. Critical Reviews in Food Science and Nutrition 55(9):1287-1301.
+>Hyperspectral Imaging, https://en.wikipedia.org/wiki/Hyperspectral_imaging
