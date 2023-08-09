@@ -27,3 +27,6 @@ Research method skill, Programming language (preferably Python), Machine Learnin
 ### Machine learning theory:
 • A survey on instance segmentation: state of the art (https://link.springer.com/article/10.1007/s13735-020-00195-x)
 • Detectron2 Train an Instance Segmentation Model (https://gilberttanner.com/blog/detectron2-train-a-instance-segmentation-model)
+
+
+#
