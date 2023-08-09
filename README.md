@@ -227,3 +227,16 @@ In the limit of time for this proof-of-concept, there are some limitations that 
 >Wu, W., Chen, G. Y., Kang, R., Xia, J. C., Huang, Y. P., & Chen, K. J. (2017). Successive Projections Algorithm-Multivariable Linear Regression Classifier for The Detection Of Contaminants on Chicken Carcasses In Hyperspectral Images. Journal of Applied Spectroscopy, 84(3), 535-541.
 >Xiong, Z., Xie, A., Sun, D-W. and Liu, D. (2015). Applications of Hyperspectral Imaging in Chicken Meat Safety and Quality Detection and Evaluation: A Review. Critical Reviews in Food Science and Nutrition 55(9):1287-1301.
 >Hyperspectral Imaging, https://en.wikipedia.org/wiki/Hyperspectral_imaging
+
+# Team Members
+Qui Van, Tran
+Hong Thi, Dang
+Chris
+Tom
+
+# Some Demos
+![Demo 1](/images/1.GIF)
+
+![Demo 2](/images/2.GIF)
+
+![Demo 3](/images/3.GIF)
